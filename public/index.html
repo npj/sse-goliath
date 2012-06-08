@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Server-Sent Events Test</title>
+    <script src="js/jquery-1.7.2.min.js" type="text/javascript" charset="utf-8"></script>
+  </head>
+  <body>
+    <h1>THIS IS THE MOTHERFUCKING TEST</h1>
+    <div class="messages">
+      
+    </div>
+    
+     <script type="text/javascript" charset="utf-8">
+     
+        $(document).ready(function() {
+          var source = new EventSource('http://0.0.0.0:9000/source');
+          
+          var onMessage = function(data) {
+            console.log(data);
+            $("div.messages").append(JSON.parse(data.data)['message'] + "<br />");
+          };
+          
+          source.addEventListener('message', onMessage, false);
+        });
+      </script>
+  </body>
+</html>

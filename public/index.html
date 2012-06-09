@@ -17,7 +17,7 @@
           
           var onMessage = function(data) {
             console.log(data);
-            $("div.messages").append(JSON.parse(data.data)['message'] + "<br />");
+            $("div.messages").append(JSON.parse(data.data)['message'] + " ");
           };
           
           source.addEventListener('message', onMessage, false);

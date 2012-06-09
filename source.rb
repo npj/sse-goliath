@@ -1,8 +1,10 @@
 class Source < Goliath::API
   def response(env)
     
-    EventMachine.add_periodic_timer(1) do
-      env.stream_send(message(Time.now.strftime("%A %B %d, %Y %H:%M:%S %p")))
+    fib = Fiber.new{|s|loop{Fiber.yield((s=(s[0]?[(s[1]||1),s[0]+(s[1]||1)]:[0]))[0])}}
+    
+    EventMachine.add_periodic_timer(0.01) do
+      env.stream_send(message(fib.resume([ ])))
     end
     
     streaming_response(200, { 'Content-Type' => "text/event-stream" })

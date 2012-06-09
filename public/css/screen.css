@@ -35,6 +35,10 @@ body {
   width: 870px;
 }
 
+.form-container input[type=text]:disabled {
+  background-color: #ddd;
+}
+
 .form-container input[type=submit] {
   background-color: #fff;
   border: 1px solid #ccc;
@@ -42,6 +46,10 @@ body {
   width: 60px;
   margin: 0px 5px;
   padding: 0px;
+}
+
+.form-container input[type=submit]:disabled {
+  background-color: #ddd;
 }
   
 .popup {

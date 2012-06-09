@@ -31,6 +31,7 @@ function acc2zoom(acc) {
 
 $(document).ready(function() {
   
+  var ctrl    = new MessageControl(".form-container form");
   var loading = popup("Finding your location...");
   
   loading.show();
@@ -41,14 +42,21 @@ $(document).ready(function() {
     $('.map').addMarker(pos.coords.latitude, pos.coords.longitude);
     $('.map').setZoom(acc2zoom(pos.coords.accuracy - 2));
     loading.fadeOut(500);
+    
+    ctrl.setGeo(pos.coords.latitude, pos.coords.longitude);
   });
     
-  // var source = new EventSource('http://0.0.0.0:9000/source');
-  //           
-  //           var onMessage = function(data) {
-  //             console.log(data);
-  //             $("div.messages").append(JSON.parse(data.data)['message'] + " ");
-  //           };
-  //           
-  //           source.addEventListener('message', onMessage, false);
+  var source = new EventSource('/source')
+  
+  source.addEventListener('message', function(data) {
+    
+    var data = JSON.parse(data.data);
+    
+    var window = new google.maps.InfoWindow();
+    window.setContent(data.message);
+    window.setPosition(new google.maps.LatLng(data.lat, data.lng));
+    window.open($('.map').getMap()[0]);
+    setTimeout(function() { window.close() }, 3000);
+    
+  }, false);
 });

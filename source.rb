@@ -1,9 +1,11 @@
+require 'utils'
+
 class Source < Goliath::API
     
   def response(env)
         
     EM.synchrony do
-      redis = Redis.new(:driver => :synchrony)
+      redis = Utils.redis_connect(:driver => :synchrony)
       redis.subscribe('messages') do |on|
         on.message do |channel, msg|
           env.stream_send(data(msg))

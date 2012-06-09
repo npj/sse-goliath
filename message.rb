@@ -1,6 +1,8 @@
+require 'utils'
+
 class Message < Goliath::API  
   
-  @@pub = Redis.new(:driver => :synchrony)
+  @@pub = Utils.redis_connect(:driver => :synchrony)
   
   def response(env)
     @@pub.publish("messages", MultiJson.encode({ 

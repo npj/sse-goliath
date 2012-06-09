@@ -2,26 +2,25 @@
 <html>
   <head>
     <title>Server-Sent Events Test</title>
+    <script src="http://maps.googleapis.com/maps/api/js?key=AIzaSyAGYObM7KY7tN9SvD4Zd_mjVdwilEAotlw&sensor=true" type="text/javascript" charset="utf-8"></script>
     <script src="js/jquery-1.7.2.min.js" type="text/javascript" charset="utf-8"></script>
+    <script src="js/map.js" type="text/javascript" charset="utf-8"></script>
+    <script src="js/geo.js" type="text/javascript" charset="utf-8"></script>
+    <script src="js/main.js" type="text/javascript" charset="utf-8"></script>
+    <link rel="stylesheet" href="css/screen.css" type="text/css" media="screen" charset="utf-8" />
   </head>
   <body>
-    <h1>THIS IS THE MOTHERFUCKING TEST</h1>
-    <div class="messages">
-      
+    <div class="popup">
+      <div class="message"></div>
     </div>
-    
-     <script type="text/javascript" charset="utf-8">
-     
-        $(document).ready(function() {
-          var source = new EventSource('http://0.0.0.0:9000/source');
-          
-          var onMessage = function(data) {
-            console.log(data);
-            $("div.messages").append(JSON.parse(data.data)['message'] + " ");
-          };
-          
-          source.addEventListener('message', onMessage, false);
-        });
-      </script>
+    <div class="main-container">
+      <div class="map"></div>
+      <div class="form-container">
+        <form method="post" action="/message">
+          <input type="text" name="message" value="" />
+          <input type="submit" value="Send" />
+        </form>
+      </div>
+    </div>
   </body>
 </html>

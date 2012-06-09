@@ -1,0 +1,67 @@
+body {
+  font-family: 'Helvetica';
+  font-size: 12px;
+  color: #444;
+  padding: 0px;
+  margin: 0px;
+  background-color: #fff;
+}
+
+.main-container {
+  width: 960px;
+  margin: 20px;
+  margin: 20px auto;
+  border: 2px solid #ccc;
+  background-color: #eee;
+}
+
+.map {
+  width: 960px;
+  height: 540px;
+  background-color: #eee;
+}
+
+.form-container {
+  width: 960px;
+}
+
+.form-container input[type=text] {
+  background-color: #fff;
+  border: 1px solid #ccc;
+  font-size: 12px;
+  padding: 5px;
+  margin: 0px;
+  line-height: 20px;
+  width: 870px;
+}
+
+.form-container input[type=submit] {
+  background-color: #fff;
+  border: 1px solid #ccc;
+  line-height: 20px;
+  width: 60px;
+  margin: 0px 5px;
+  padding: 0px;
+}
+  
+.popup {
+  display: none;
+  font-size: 16px;
+  font-weight: bold;
+  background-color: rgba(255, 255, 255, 0.8);
+  position: absolute;
+  z-index: 1;
+  width: 240px;
+  height: 135px;
+  text-align: center;
+  border: 2px solid rgba(0, 0, 0, 0.4);
+  border-radius: 10px;
+  -moz-border-radius: 10px;
+  -webkit-border-radius: 10px;
+  cursor: pointer;
+}
+
+.popup .message {
+  padding: 10px;
+  margin-top: 40px;
+}

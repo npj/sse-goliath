@@ -28,6 +28,8 @@ body {
 .form-container input[type=text] {
   background-color: #fff;
   border: 1px solid #ccc;
+  border-bottom: none;
+  border-left: none;
   font-size: 12px;
   padding: 5px;
   margin: 0px;

@@ -1,15 +1,24 @@
-require 'utils'
+require 'pubsub'
+require 'awesome_print'
 
 class Source < Goliath::API
-    
+      
   def response(env)
+    
+    unless env['HTTP_ACCEPT'] == 'text/event-stream'
+      return [ 406, { }, [ ] ]
+    end
         
-    EM.synchrony do
-      redis = Utils.redis_connect(:driver => :synchrony)
-      redis.subscribe('messages') do |on|
-        on.message do |channel, msg|
-          env.stream_send(data(msg))
-        end
+    sub_id = Pubsub.channel.subscribe do |msg|
+      env.stream_send(data(msg))
+    end
+    
+    env['pubsub.subscriber.id'] = sub_id
+    
+    Pubsub.callback(:on_close, sub_id) do |e|
+      if e['pubsub.subscriber.id'] == sub_id
+        Pubsub.channel.unsubscribe(sub_id)
+        Pubsub.remove(:on_close, sub_id)
       end
     end
     

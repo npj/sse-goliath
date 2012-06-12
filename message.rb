@@ -1,11 +1,10 @@
-require 'utils'
+require 'pubsub'
+require 'awesome_print'
 
 class Message < Goliath::API  
   
-  @@pub = Utils.redis_connect(:driver => :synchrony)
-  
   def response(env)
-    @@pub.publish("messages", MultiJson.encode({ 
+    Pubsub.channel.push(MultiJson.encode({
       :message => env.params["message"], 
       :lat     => env.params["lat"],
       :lng     => env.params["lng"]
